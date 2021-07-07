@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ${PWD}:/src-root
+    environment:
+      RUST_LOG: DEBUG
+      DATABASE_URL: postgres://api:12345@db:5432/test
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: postgres:alpine
+    volumes:
+      - data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: api
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: test
+    ports:
+      - 5432:5432
+    restart: always
+
+volumes:
+  data:

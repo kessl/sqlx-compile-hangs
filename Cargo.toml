@@ -1,0 +1,9 @@
+[package]
+name = "sqlx-compile-hangs"
+version = "0.0.1"
+authors = ["Daniel Kessl <dan@kessl.net>"]
+edition = "2018"
+
+[dependencies]
+sqlx = { version = "0.5", features = ["runtime-tokio-native-tls", "postgres"] }
+tokio = { version = "1", features = ["full"] }
